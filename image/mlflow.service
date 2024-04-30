@@ -1,0 +1,9 @@
+[Unit]
+Description=MLFlow Server
+
+[Service]
+Type=simple
+
+ExecStart=/bin/bash -c 'PATH=/opt/bin/conda/
+
+User=
