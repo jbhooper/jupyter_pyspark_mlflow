@@ -9,7 +9,7 @@ if [ -z ${ARTIFACT_ROOT+x} ]
 fi
 if [ -z ${MLFLOW_PORT+x} ]
   then :
-  else PORT_FLAG="-port ${MLFLOW_PORT}"
+  else PORT_FLAG="--port ${MLFLOW_PORT}"
 fi
 
 /opt/conda/bin/mlflow server ${BACKEND_FLAG} ${ARTIFACT_ROOT} -host 0.0.0.0 ${PORT_FLAG}
