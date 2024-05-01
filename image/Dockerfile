@@ -12,7 +12,7 @@ RUN apt-get update --yes && \
 
 COPY supervisord.conf /etc/supervisord.conf
 COPY start_mlflow.sh /usr/local/bin
-RUN chmod a+rx /usr/local/bin/start_mlflow.sh
+RUN chmod 755 /usr/local/bin/start_mlflow.sh
 
 # If you do switch to root, always be sure to add a "USER $NB_USER" command at the end of the
 # file to ensure the image runs as a unprivileged user by default.
