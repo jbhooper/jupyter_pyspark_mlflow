@@ -19,10 +19,11 @@ COPY --chmod=755 start_mlflow.sh /usr/local/bin/
 USER ${NB_UID}
 
 # Install mlflow and dependencies
-RUN mamba install --yes 'mlflow' && \
-    mamba clean --all -f -y && \
-    fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/${NB_USER}"
+RUN pip install mlflow
+#RUN mamba install --yes 'mlflow' && \
+#    mamba clean --all -f -y && \
+#    fix-permissions "${CONDA_DIR}" && \
+#    fix-permissions "/home/${NB_USER}"
 
 ENV BACKEND_URI ${HOME}/mlflow
 RUN mkdir -p ${BACKEND_URI}
