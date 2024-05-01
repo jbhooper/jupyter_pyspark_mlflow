@@ -32,4 +32,4 @@ RUN mkdir -p ${ARTIFACT_ROOT}
 ENV MLFLOW_PORT 5000
 EXPOSE $MLFLOW_PORT
 
-CMD ["/bin/bash"]
+#CMD ["/bin/bash"]
