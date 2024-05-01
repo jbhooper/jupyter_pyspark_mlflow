@@ -7,9 +7,11 @@ FROM quay.io/jupyter/pyspark-notebook
 SHELL ["/bin/bash","-o","pipefail","-c"]
 USER root
 RUN apt-get update --yes && \
-    apt-get install --yes --no-install-recommends "vim" && \
+    apt-get install --yes --no-install-recommends supervisor vim && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
+COPY supervisord.conf /etc/supervisord.conf
+COPY start_mlflow.sh /usr/local/bin
 
 # If you do switch to root, always be sure to add a "USER $NB_USER" command at the end of the
 # file to ensure the image runs as a unprivileged user by default.
@@ -29,4 +31,5 @@ RUN mkdir -p ${ARTIFACT_ROOT}
 
 ENV MLFLOW_PORT 5000
 EXPOSE $MLFLOW_PORT
-#CMD mlflow server --backend-store-uri ${BACKEND_URI} --default-artifact-root ${ARTIFACT_ROOT} -host 0.0.0.0 -port ${MLFLOW_PORT} &
+
+CMD ["/bin/bash"]
