@@ -29,4 +29,4 @@ RUN mkdir -p ${ARTIFACT_ROOT}
 
 ENV MLFLOW_PORT 5000
 EXPOSE $MLFLOW_PORT
-#CMD mlflow server --backend-store-uri ${BACKEND_URI} --default-artifact-root ${ARTIFACT_ROOT} -host 0.0.0.0 -port ${MLFLOW_PORT} &
+CMD mlflow server --backend-store-uri ${BACKEND_URI} --default-artifact-root ${ARTIFACT_ROOT} -host 0.0.0.0 -port ${MLFLOW_PORT} &
