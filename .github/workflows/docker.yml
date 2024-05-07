@@ -19,6 +19,7 @@ on:
   push:
     branches:
       - main
+      - v_1.0_multiarch
     paths:
       - ".github/workflows/docker.yml"
       - "image/**"
@@ -58,8 +59,15 @@ jobs:
           echo "sha12=$(echo ${GITHUB_SHA} | cut -c1-12)" >> $GITHUB_OUTPUT
         id: get_sha
 
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        with:
+          use: linux/amd64,linux/arm64
+
       - name: Build image 🛠
-        run: docker build --rm --force-rm --tag ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest --tag ${{ env.OWNER }}/${{ env.IMAGE_NAME }}:${{steps.get_sha.outputs.sha12}} image/
+        run: docker buildx build --platform=linux/amd64,linux/arm64 --rm --force-rm --tag ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest --tag ${{ env.OWNER }}/${{ env.IMAGE_NAME }}:${{steps.get_sha.outputs.sha12}} image/
         env:
           DOCKER_BUILDKIT: 1
           # Full logs for CI build
