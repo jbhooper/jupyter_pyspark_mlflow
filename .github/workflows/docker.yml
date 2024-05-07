@@ -19,6 +19,7 @@ on:
   push:
     branches:
       - main
+      - v_1.0_multiarch
     paths:
       - ".github/workflows/docker.yml"
       - "image/**"
